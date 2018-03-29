@@ -33,3 +33,5 @@ description: DBA的日常工作内容。
 
 >SQL> Select * from v$log;  
 SQL> Select * from v$logfile;
+
+## 3.日常性能监控
