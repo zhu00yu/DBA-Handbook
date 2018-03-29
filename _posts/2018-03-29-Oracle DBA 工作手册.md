@@ -9,4 +9,4 @@ description: DBA的日常工作内容。
 ## 1.系统运行环境监控
 >df –kv
 
-  CPU、内存、网络、IO、进程、页面交换：topas
+	CPU、内存、网络、IO、进程、页面交换：topas
