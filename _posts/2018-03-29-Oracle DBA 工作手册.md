@@ -32,4 +32,5 @@ description: DBA的日常工作内容。
 ### 日志文件是否正常
 
 >SQL> Select * from v$log;
+
 SQL> Select * from v$logfile;
