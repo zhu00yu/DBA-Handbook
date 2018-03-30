@@ -47,6 +47,7 @@ SQL> Select * from v$logfile;
 
 ## 4.日常数据库管理
 
+<font color='red'> 12345 </font>
 **保证5个日志组在运行**
 >--查看日志组  
  select * from v$log;  
@@ -65,7 +66,7 @@ alter system switch logfile;
  Select count(*) from v$session where status='ACTIVE';　--#并发连接数  
  show parameter processes;  --#最大连接  
 
->--修改连接然后重启数据库
+>--修改连接然后重启数据库  
  alter system set processes=2000 scope = spfile;  
  show parameter processes;  
  create pfile from spfile;  
