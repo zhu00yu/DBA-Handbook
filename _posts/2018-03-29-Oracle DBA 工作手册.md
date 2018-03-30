@@ -128,4 +128,11 @@ WHERE a.tablespace_name=b.tablespace_name
  TEMPORARY TABLESPACE bbis_t_TEMP ACCOUNT UNLOCK;  
  grant dba to bbis_t_0001;  
  
+ ## 5.数据备份与恢复  
+ **数据泵导出**  
  
+ **数据泵导入**  
+ 
+ **RMAN备份**  
+ 
+ **RMAN恢复**  
