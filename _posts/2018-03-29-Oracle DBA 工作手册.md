@@ -46,6 +46,18 @@ SQL> Select * from v$logfile;
 >WHERE rownum <= 10;  
 
 ## 4.日常数据库管理
+
+**保证5个日志组在运行**
+>--查看日志组  
+ select * from v$log;  
+ show parameter compatible;  
+ select group#,blocksize,archived,members,status from V$log;  
+>--增加日志组  
+alter database add logfile group 4 ('/orcl/app/oracle/oradata/ORADATA/ORCL/REDO04-01.LOG','/orcl/app/oracle/oradata/ORADATA/ORCL/REDO04-02.LOG')size 200m;  
+>--切换日志组  
+alter system switch logfile;  
+
+
 **表空间使用率**
 >SELECT a.tablespace_name, ROUND (100 - b.free / a.total * 100) used_pct,  
        ROUND (a.total / 1024 / 1024) "total(MB)",  
@@ -71,10 +83,10 @@ WHERE a.tablespace_name=b.tablespace_name
  SEGMENT SPACE MANAGEMENT AUTO;  
  
  **创建临时表空间，2G自动扩展，每次扩展1G**
- >CREATE SMALLFILE TEMPORARY TABLESPACE "BBIS_T_TEMP"
- TEMPFILE
- '/orcl/app/oracle/oradata/orcl/bbis_t_temp' SIZE 2G AUTOEXTEND ON NEXT 1G
- EXTENT MANAGEMENT LOCAL UNIFORM;
+ >CREATE SMALLFILE TEMPORARY TABLESPACE "BBIS_T_TEMP"  
+ TEMPFILE  
+ '/orcl/app/oracle/oradata/orcl/bbis_t_temp' SIZE 2G AUTOEXTEND ON NEXT 1G  
+ EXTENT MANAGEMENT LOCAL UNIFORM;  
  
  **创建索引表空间，10G自动扩展，每次扩展1G**
  >CREATE SMALLFILE TABLESPACE "BBIS_T_INDEX"  
@@ -85,3 +97,22 @@ WHERE a.tablespace_name=b.tablespace_name
  ONLINE  
  EXTENT MANAGEMENT LOCAL AUTOALLOCATE  
  SEGMENT SPACE MANAGEMENT AUTO;  
+ 
+ **删除表空间**
+ >drop tablespace bbis_t_temp  
+ >去HDFS删除表空间文件
+ 
+ **查看用户会话并关闭**
+ >select username,serial#, sid from v$session where username = 'bbis_t_0001';  
+ >alter system kill session '43,8050';  
+ 
+ **删除用户**
+ >drop user bbis_t_0001 cascade;  
+ 
+ **创建用户**
+ >CREATE USER bbis_t_0001  IDENTIFIED BY root123  
+ DEFAULT TABLESPACE bbis_t_0001  
+ TEMPORARY TABLESPACE bbis_t_TEMP ACCOUNT UNLOCK;  
+ grant dba to bbis_t_0001;  
+ 
+ 
