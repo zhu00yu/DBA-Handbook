@@ -35,3 +35,18 @@ description: DBA的日常工作内容。
 SQL> Select * from v$logfile;
 
 ## 3.日常性能监控
+
+**通过视图查看当前主要影响性能SQL语句**
+	SELECT * FROM
+
+	(SELECT hash_value,address,substr(sql_text,1,40) sql,
+
+		buffer_gets, executions, buffer_gets/executions "Gets/Exec"
+
+		FROM V$SQLAREA
+
+		WHERE buffer_gets > 100000 AND executions > 10
+
+	ORDER BY buffer_gets DESC)
+
+	WHERE rownum <= 10;
