@@ -40,13 +40,8 @@ SQL> Select * from v$logfile;
 	SELECT * FROM
 
 	(SELECT hash_value,address,substr(sql_text,1,40) sql,
-
 		buffer_gets, executions, buffer_gets/executions "Gets/Exec"
-
 		FROM V$SQLAREA
-
 		WHERE buffer_gets > 100000 AND executions > 10
-
 	ORDER BY buffer_gets DESC)
-
 	WHERE rownum <= 10;
