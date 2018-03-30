@@ -59,6 +59,17 @@ alter database add logfile group 4 ('/orcl/app/oracle/oradata/ORADATA/ORCL/REDO0
 >--切换日志组  
 alter system switch logfile;  
 
+**增加Process**
+>--查看ORACLE最大进程数：  
+ select count(*) from v$session;  --#连接数  
+ Select count(*) from v$session where status='ACTIVE';　--#并发连接数  
+ show parameter processes;  --#最大连接  
+
+>--修改连接然后重启数据库
+ alter system set processes=2000 scope = spfile;  
+ show parameter processes;  
+ create pfile from spfile;  
+ 
 
 **表空间使用率**
 >SELECT a.tablespace_name, ROUND (100 - b.free / a.total * 100) used_pct,  
