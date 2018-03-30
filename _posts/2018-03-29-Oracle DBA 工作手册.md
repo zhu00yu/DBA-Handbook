@@ -52,8 +52,10 @@ SQL> Select * from v$logfile;
  select * from v$log;  
  show parameter compatible;  
  select group#,blocksize,archived,members,status from V$log;  
+
 >--增加日志组  
 alter database add logfile group 4 ('/orcl/app/oracle/oradata/ORADATA/ORCL/REDO04-01.LOG','/orcl/app/oracle/oradata/ORADATA/ORCL/REDO04-02.LOG')size 200m;  
+
 >--切换日志组  
 alter system switch logfile;  
 
