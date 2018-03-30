@@ -47,16 +47,16 @@ SQL> Select * from v$logfile;
 
 ## 4.日常数据库管理
 **表空间使用率**
->SELECT a.tablespace_name, ROUND (100 - b.free / a.total * 100) used_pct,
-       ROUND (a.total / 1024 / 1024) "total(MB)",
-       ROUND (b.free / 1024 / 1024) "free_total(MB)",
-       ROUND (b.max_free / 1024 / 1024) "free_max(MB)", b.free_cnt fragment
-  FROM (SELECT   tablespace_name, SUM (BYTES) total
-            FROM dba_data_files
-        GROUP BY tablespace_name) a,
-       (SELECT   tablespace_name, SUM (BYTES) free, MAX (BYTES) max_free,
-                 COUNT (BYTES) free_cnt
-            FROM dba_free_space
-        GROUP BY tablespace_name) b
-WHERE a.tablespace_name=b.tablespace_name 
+>SELECT a.tablespace_name, ROUND (100 - b.free / a.total * 100) used_pct,  
+       ROUND (a.total / 1024 / 1024) "total(MB)",  
+       ROUND (b.free / 1024 / 1024) "free_total(MB)",  
+       ROUND (b.max_free / 1024 / 1024) "free_max(MB)", b.free_cnt fragment  
+  FROM (SELECT   tablespace_name, SUM (BYTES) total  
+            FROM dba_data_files  
+        GROUP BY tablespace_name) a,  
+       (SELECT   tablespace_name, SUM (BYTES) free, MAX (BYTES) max_free,  
+                 COUNT (BYTES) free_cnt  
+            FROM dba_free_space  
+        GROUP BY tablespace_name) b  
+WHERE a.tablespace_name=b.tablespace_name   
 
