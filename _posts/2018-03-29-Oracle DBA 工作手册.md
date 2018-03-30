@@ -47,7 +47,6 @@ SQL> Select * from v$logfile;
 
 ## 4.日常数据库管理
 
-<font color='red'> 12345 </font>
 **保证5个日志组在运行**
 >--查看日志组  
  select * from v$log;  
