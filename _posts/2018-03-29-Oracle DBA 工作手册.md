@@ -133,6 +133,7 @@ WHERE a.tablespace_name=b.tablespace_name
  
  **数据泵导入**  
  
+ >impdp bbis_t_0001/root123 fromuser=srcU touser=desU file=srcU_BAK.DMP remap_tablespace='(srcU_DATA:desU0001,srcU2_data:desU0001)' logfile=log_0330.log
  **RMAN备份**  
  
  **RMAN恢复**  
