@@ -126,7 +126,8 @@ WHERE a.tablespace_name=b.tablespace_name
  >CREATE USER bbis_t_0001  IDENTIFIED BY root123  
  DEFAULT TABLESPACE bbis_t_0001  
  TEMPORARY TABLESPACE bbis_t_TEMP ACCOUNT UNLOCK;  
- grant dba to bbis_t_0001;  
+ grant create session, connect, resource, dba to bbis_t_0001;  
+
  
  ## 5.数据备份与恢复  
  **数据泵导出**  
